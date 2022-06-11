@@ -11,17 +11,17 @@ def home():
 @app.route('/predict' , methods = ['POST'])
 def predict():
 
-    response = ""
-    review = request.json.get('customer_review')
-    if not review:
-        response = {'status' : 'error',
+    resp = ""
+    rev = request.json.get('customer_review')
+    if not rev:
+        resp = {'status' : 'error',
                     'message' : 'Empty Review'}
     
     else:
 
         # calling the predict method from prediction.py module
         sentiment , path = prediction.predict(review)
-        response = {'status' : 'success',
+        resp = {'status' : 'success',
                     'message' : 'Got it',
                     'sentiment' : sentiment,
                     'path' : path}
@@ -36,7 +36,7 @@ def save():
     # extracting date , product name , review , sentiment associated from the JSOn data
     date = request.json.get('date')
     product = request.json.get('product')
-    review = request.json.get('review')
+    rev = request.json.get('review')
     sentiment = request.json.get('sentiment')
 
     # creating a final variable seperated by commas
